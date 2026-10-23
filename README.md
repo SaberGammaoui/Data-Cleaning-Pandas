@@ -51,3 +51,13 @@ After running the cleaning cells and reviewing `df`, add a final cell to save a 
 ```python
 df.to_excel("Customer Call List Cleaned.xlsx", index=False)
 ```
+
+## Troubleshooting
+
+| Symptom | What to check |
+| --- | --- |
+| `FileNotFoundError` when loading the workbook | Replace the original Windows path as shown above, keep `Customer Call List.xlsx` beside the notebook, and start Jupyter from the repository folder. Check the filename and extension. |
+| Missing `openpyxl` dependency when reading Excel | Install `openpyxl` in the same Python environment used by the notebook kernel, then restart the kernel. Installing it in a different environment will not make it available to this notebook. |
+| `KeyError` mentioning `Not_Useful_Column` after rerunning a cell | The column-removal cell changes `df`. Running that cell again on the already-cleaned DataFrame tries to remove a column that is no longer present. Restart the kernel and run all cells from the workbook-loading cell in order. |
+
+For a different input workbook, compare its column headers with those used in the notebook before running the cleaning steps. Names such as `Phone_Number`, `Last_Name`, `Paying Customer`, and `Do_Not_Contact` must match exactly, including spaces and underscores.
